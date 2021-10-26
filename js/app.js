@@ -18,3 +18,24 @@ function startVideo() {
 		(err) => console.error(err)
 	);
 }
+
+//video overlays for face detection
+video.addEventListener("playing", () => {
+	const canvas = faceapi.createCanvasFromMedia(video);
+	document.body.append(canvas);
+
+	const displaySize = { width: video.width, height: video.height };
+	faceapi.matchDimensions(canvas, displaySize);
+
+	//every 100 milliseconds the app awaits the faceapi and it detects all of the faces.
+	//then it reseizes the detections to the canvas and then draws them on the canvas
+	setInterval(async () => {
+		const detections = await faceapi.detectAllFaces(
+			video,
+			new faceapi.TinyFaceDetectorOptions()
+		);
+		const resizedDetections = faceapi.resizeResults(detections, displaySize);
+
+		faceapi.draw.drawDetections(canvas, resizedDetections);
+	}, 100);
+});
