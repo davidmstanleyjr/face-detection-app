@@ -28,14 +28,17 @@ video.addEventListener("playing", () => {
 	faceapi.matchDimensions(canvas, displaySize);
 
 	//every 100 milliseconds the app awaits the faceapi and it detects all of the faces.
-	//then it reseizes the detections to the canvas and then draws them on the canvas
+	//then it resizes the detections to the canvas and then draws them on the canvas
 	setInterval(async () => {
-		const detections = await faceapi.detectAllFaces(
-			video,
-			new faceapi.TinyFaceDetectorOptions()
-		);
+		const detections = await //detects landmarks
+		faceapi
+			.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
+			.withFaceLandmarks();
 		const resizedDetections = faceapi.resizeResults(detections, displaySize);
+		//clears all the detections and allows for one face detection.
+		canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
 
 		faceapi.draw.drawDetections(canvas, resizedDetections);
+		faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
 	}, 100);
 });
