@@ -22,7 +22,8 @@ Reading the docs and figuring out how to implement all of the different features
 ![Screenshot 1](images/snip1.PNG)
 ![Screenshot 2](images/snip2.PNG)
 ![Screenshot 3](images/snip3.PNG)
-![Screenshot 4](images/snip4.PNG)![Screenshot 3](images/snip5.PNG)
+![Screenshot 4](images/snip4.PNG)!
+[Screenshot 5](images/snip5.PNG)
 
 ## Live Page
 
